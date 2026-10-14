@@ -1,0 +1,33 @@
+name: "Run tests + Render Schematic and PCB"
+
+on: push
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Run DRC and ERC
+              run: kibot -c ci/test.kibot.yaml
+    eyecandy:
+        runs-on: ubuntu-latest
+        container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v4
+            - name: "Run eyecandy"
+              run: kibot -c ci/eyecandy.kibot.yaml
+            - name: Setup Pages
+              uses: actions/configure-pages@v5
+            - name: "Upload artifacts"
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: "generated"
+            - name: "Deploy"
+              uses: actions/deploy-pages@v4

@@ -1,0 +1,12 @@
+name: "JLCPCB Outputs"
+
+on: workflow_dispatch
+
+jobs:
+    jlc:
+        runs-on: ubuntu-latest
+        container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Run DRC
+              run: kibot -c ci/jlc.kibot.yaml

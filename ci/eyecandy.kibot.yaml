@@ -1,0 +1,9 @@
+kibot:
+  version: 1
+
+outputs:
+  # https://kibot.readthedocs.io/en/latest/configuration/outputs/ibom.html
+  - type: ibom
+    comment: 'IBOM'
+    dir: 'generated'
+    name: 'IBOM'

@@ -1,0 +1,14 @@
+# Folders
+production/
+*-backups/
+
+# Files
+_autosave*
+*.lck
+*.kicad_prl
+fp-info-cache
+*.tmp
+fabrication-toolkit-options.json
+
+# Other
+.DS_Store
